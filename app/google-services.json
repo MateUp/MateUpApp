@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "167452200361",
+    "firebase_url": "https://mateup-66ab0.firebaseio.com",
+    "project_id": "mateup-66ab0",
+    "storage_bucket": "mateup-66ab0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167452200361:android:17cf915f37f72dd7",
+        "android_client_info": {
+          "package_name": "com.example.mateup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167452200361-57s8dspsfl6amrmnpp490lbtsjm6c6m3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mateup",
+            "certificate_hash": "f210f686d6af8941b97ae01c9b82f3f85980be43"
+          }
+        },
+        {
+          "client_id": "167452200361-cf1dnccopehujmoopk4hnlhgh9icq3qq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRTuVVh3T2Pbapfn7mV-KYaIAIHPy4tUc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167452200361-cf1dnccopehujmoopk4hnlhgh9icq3qq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
