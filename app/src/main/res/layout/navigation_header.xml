@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background">
 
+    //Username in drawer
     <TextView
         android:id="@+id/username"
         android:layout_width="135dp"
@@ -24,6 +25,7 @@
         android:textColor="@color/colorPrimary"
         android:textSize="16sp" />
 
+    //Profile pic in drawer
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/new_profileImage"
         android:layout_width="150dp"
