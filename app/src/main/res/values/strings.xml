@@ -2,4 +2,10 @@
     <string name="app_name">MateUp</string>
     <string name="drawer_open">Drawer Open</string>
     <string name="drawer_close">Drawer Close</string>
+    <string name="name_of_user">Name of user</string>
+    <string name="profession">Profession</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="personal_information">Personal Information</string>
 </resources>

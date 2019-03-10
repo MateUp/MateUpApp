@@ -1,10 +1,17 @@
 package com.example.mateup;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +20,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.mateup.FragmentsCardsForProfile.BiographyFragment;
+import com.example.mateup.FragmentsCardsForProfile.PartnersFragment;
+import com.example.mateup.FragmentsCardsForProfile.VideosFragment;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -41,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         View navHeader = navigationView.inflateHeaderView(R.layout.navigation_header);
+
 
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -74,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
          switch (menuItem.getItemId())
          {
              case R.id.myprofile:
-                 Toast.makeText(this, "Going on my profile", Toast.LENGTH_SHORT).show();
+                 SendUserToProfileActivity();
                  break;
 
              case R.id.messages:
@@ -92,4 +106,10 @@ public class MainActivity extends AppCompatActivity {
          }
 
     }
-}
+    private void SendUserToProfileActivity(){
+        Intent loginIntent=new Intent(MainActivity.this,ProfileActivity.class);
+        startActivity(loginIntent) ;
+    }
+
+    }
+

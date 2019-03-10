@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentsCardsForProfile.BiographyFragment"
+    android:background="#3A3A3B">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/personal_information"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Personal information"
+            android:textColor="#FFFFFF"
+            android:textSize="23dp"
+            android:textStyle="bold" />
+
+        //RelativeLayout za Personal informaton
+        <RelativeLayout
+            android:layout_width="350dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/personal_information"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="#707073">
+
+            <TextView
+                android:id="@+id/name_of_user"
+                android:layout_width="350dp"
+                android:layout_height="30dp"
+                android:text="Name of user"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:textColor="#fff"/>
+            <TextView
+                android:id="@+id/country"
+                android:layout_width="350dp"
+                android:layout_height="30dp"
+                android:text="Country"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:textColor="#fff"/>
+            <TextView
+                android:id="@+id/profession"
+                android:layout_width="350dp"
+                android:layout_height="30dp"
+                android:text="Profession"
+                android:textSize="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="60dp"
+                android:textColor="#fff"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/bio"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="130dp"
+            android:layout_marginRight="20dp"
+            android:text="About me"
+            android:layout_below="@id/personal_information"
+            android:textColor="#FFFFFF"
+            android:textSize="23dp"
+            android:textStyle="bold" />
+
+        //RelativeLazout za About me
+
+        <RelativeLayout
+            android:layout_width="350dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/bio"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="#707073">
+
+            <TextView
+                android:layout_width="350dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="I am programmer, looking for graphic designer"
+                android:textSize="18dp"
+                android:textColor="#fff"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</FrameLayout>
