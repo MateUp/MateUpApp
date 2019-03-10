@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     private NavigationView navigationView;
     private RecyclerView recyclerView;
-    private DrawerLayout drawerLayout;
+    public DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private Toolbar mainToolbar;
 
@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mainToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -75,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
 
          switch (menuItem.getItemId())
          {
+             case R.id.storyline:
+                 SendUserToStoryLineActivity();
+                 break;
+
              case R.id.myprofile:
                  SendUserToProfileActivity();
                  break;
@@ -88,12 +93,23 @@ public class MainActivity extends AppCompatActivity {
                  break;
 
              case R.id.logout:
-                 Toast.makeText(this, "Logging Out", Toast.LENGTH_SHORT).show();
+                openLoginActivity();
                  break;
 
          }
 
     }
+
+    private void openLoginActivity() {
+        Intent loginActivity = new Intent (this,LoginActivity.class);
+        startActivity(loginActivity);
+    }
+
+    private void SendUserToStoryLineActivity() {
+        Intent storyLine = new Intent(MainActivity.this,MainActivity.class);
+        startActivity(storyLine);
+    }
+
     private void SendUserToProfileActivity(){
         Intent loginIntent=new Intent(MainActivity.this,ProfileActivity.class);
         startActivity(loginIntent) ;

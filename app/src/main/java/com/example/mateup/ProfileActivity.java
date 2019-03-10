@@ -1,12 +1,14 @@
 package com.example.mateup;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.widget.TextView;
 
 import com.example.mateup.FragmentsCardsForProfile.BiographyFragment;
@@ -22,10 +24,13 @@ public class ProfileActivity extends AppCompatActivity {
     private CircleImageView new_profile_image;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
 
         name_of_user=(TextView) findViewById(R.id.name_of_user);
         profession=(TextView) findViewById(R.id.profession);
@@ -35,6 +40,13 @@ public class ProfileActivity extends AppCompatActivity {
 
         TabLayout tabLayout=findViewById(R.id.tab_layout);
          ViewPager viewPager=findViewById(R.id.view_pager);
+
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
+
+
+
 
 
 

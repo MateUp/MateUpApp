@@ -10,7 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity {
-    private Button loginButton;private Button registerButton;
+    private Button loginButton;
+    private Button registerButton;
     private EditText emailLogin, passwordLogin;
     private CheckBox rememberMe;
     private TextView textView2;
@@ -32,13 +33,26 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openProfileActivity();
+                openStoryLineActivity();
             }
+        });
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRegisterActivity();
+            }
+
         });
 
     }
-    public void openProfileActivity(){
-        Intent intent = new Intent(this, ProfileActivity.class);
-        startActivity(intent);
+
+    private void openRegisterActivity() {
+        Intent openRegister = new Intent(this, RegisterActivity.class);
+        startActivity(openRegister);
+    }
+
+    public void openStoryLineActivity(){
+        Intent openStoryLine = new Intent(this, MainActivity.class);
+        startActivity(openStoryLine);
     }
 }

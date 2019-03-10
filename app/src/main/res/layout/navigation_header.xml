@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background">
+    android:background="@drawable/background_dark">
 
     //Username in drawer
     <TextView
@@ -22,7 +22,7 @@
         android:layout_marginTop="170dp"
         android:layout_marginBottom="146dp"
         android:text="MateUp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/white"
         android:textSize="16sp" />
 
     //Profile pic in drawer
@@ -32,7 +32,7 @@
         android:layout_height="150dp"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="15dp"
-        android:src="@drawable/mateuplogo"
+        android:src="@drawable/profile"
         app:civ_border_color="@color/colorPrimaryDark"
         app:civ_border_width="2dp" />
 
