@@ -7,15 +7,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.mateup.FragmentsCardsForProfile.BiographyFragment;
 import com.example.mateup.FragmentsCardsForProfile.PartnersFragment;
-import com.example.mateup.FragmentsCardsForProfile.VideosFragment;
+import com.example.mateup.FragmentsCardsForProfile.PostsFragment;
 
 import java.util.ArrayList;
 
@@ -74,7 +70,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
         ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new BiographyFragment(),"Biography");
-        viewPagerAdapter.addFragment(new VideosFragment(),"Posts");
+        viewPagerAdapter.addFragment(new PostsFragment(),"Posts");
         viewPagerAdapter.addFragment(new PartnersFragment(),"Partners");
 
         viewPager.setAdapter(viewPagerAdapter);
