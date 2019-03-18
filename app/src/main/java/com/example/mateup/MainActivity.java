@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     public DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private Toolbar mainToolbar;
+    private Spinner dropdownMenu;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
+
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         //Toolbar btn
@@ -43,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         View navHeader = navigationView.inflateHeaderView(R.layout.navigation_header);
+
+
 
 
 
@@ -59,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
     @Override
     //btn for drawer
     public boolean onOptionsItemSelected(MenuItem item){

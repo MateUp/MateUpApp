@@ -3,11 +3,15 @@ package com.example.mateup;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
@@ -52,7 +56,25 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void openStoryLineActivity(){
-        Intent openStoryLine = new Intent(this, MainActivity.class);
-        startActivity(openStoryLine);
+        final JSONObject user = new JSONObject();
+        try {
+            user.put("email", emailLogin.getText());
+            user.put("password", passwordLogin.getText());
+
+
+        } catch (JSONException e) {
+            Log.e("Filippppp", "FILIP_ERR 1");
+            e.printStackTrace();
+        }
+
+
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+
+            }
+        });
+        t.start();
     }
 }

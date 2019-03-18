@@ -14,8 +14,7 @@ limitations under the License.*/
 
 
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import android.util.Log;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -35,8 +34,8 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
-import android.widget.Toast;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 public class RestClient {
 
@@ -49,7 +48,7 @@ public class RestClient {
 
     public RestClient(String s){
 
-        url = "https://367d4f76.ngrok.io/api" + s;
+        url = "https://mateup.nstechlabs.com/api" + s;
 
         Header header1 = new BasicHeader(HttpHeaders.CONTENT_TYPE, "application/json");
 

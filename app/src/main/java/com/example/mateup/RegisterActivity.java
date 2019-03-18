@@ -1,13 +1,13 @@
 package com.example.mateup;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.mateup.services.RestClient;
 
@@ -40,16 +40,16 @@ public class RegisterActivity extends AppCompatActivity {
         RegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openStoryLineActivity();
+                openLoginActivity();
             }
         });
 
-    }
-    public void openStoryLineActivity(){
-//        Intent openStoryLine = new Intent(this, MainActivity.class);
-//        startActivity(openStoryLine);
 
-//        String data = new
+
+    }
+    public void openLoginActivity(){
+
+
 
 
         final JSONObject user = new JSONObject();
@@ -72,20 +72,45 @@ public class RegisterActivity extends AppCompatActivity {
                     RestClient rc = new RestClient("/users");
                     String response = rc.executePost(user.toString());
 
+
+
+
                     Log.i("Server response", response);
                     if (response != null) {
                         JSONObject res = new JSONObject(response);
                         res.get("token");
+
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Toast.makeText(getBaseContext(),"Registered",Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+                        Intent openLoginActivity = new Intent(getApplicationContext(),LoginActivity.class);
+                        startActivity(openLoginActivity);
+
+
+
                     }
+
                 } catch (Exception e) {
                     Log.e("Filippppp", e.getMessage());
-//                    Log.e("Filippppp", e.toString());
+                    Log.e("Filippppp", e.toString());
                     Log.v("Filipppp", "Verbos");
                     e.printStackTrace();
+
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(getBaseContext(),"Fill all fields",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                 }
+
             }
         });
         t.start();
+
 
 
 
