@@ -69,8 +69,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    RestClient rc = new RestClient("/users");
-                    String response = rc.executePost(user.toString());
+                        RestClient rc = new RestClient("/users");
+                        String response = rc.executePost(user.toString());
 
 
 

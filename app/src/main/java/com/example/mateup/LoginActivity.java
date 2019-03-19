@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.mateup.services.RestClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -71,6 +74,51 @@ public class LoginActivity extends AppCompatActivity {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
+
+                try {
+                    RestClient rc = new RestClient("/users/login");
+                    String response = rc.executePost(user.toString());
+
+
+
+                    if (response != null) {
+                        JSONObject res = new JSONObject(response);
+                        res.get("token");
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(LoginActivity.this, "Logged in", Toast.LENGTH_SHORT).show();
+                            }
+
+                        });
+
+                        Intent openStoryLineActivity = new Intent(getApplicationContext(),MainActivity.class);
+                        startActivity(openStoryLineActivity);
+
+
+                    }
+
+
+                }catch (Exception e)
+                {
+                    Log.e("Filippppp", e.getMessage());
+                    Log.e("Filippppp", e.toString());
+                    Log.v("Filipppp", "Verbos");
+                    e.printStackTrace();
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(LoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                        }
+
+                    });
+
+
+                }
+
+
 
 
             }

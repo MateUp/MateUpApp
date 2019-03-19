@@ -56,7 +56,9 @@ public class RestClient {
 //        if (ako ima token) {
 //            Header header1 = new BasicHeader(HttpHeaders.AUTHORIZATION, Dodaj token);
 //        }
+
     }
+
 
 
     public void addHeader(String name, String value){
