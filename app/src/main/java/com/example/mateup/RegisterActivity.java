@@ -101,7 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                     runOnUiThread(new Runnable() {
                         public void run() {
-                            Toast.makeText(getBaseContext(),"Fill all fields",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
                         }
                     });
 
