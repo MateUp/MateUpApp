@@ -1,19 +1,24 @@
 package com.example.mateup;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.mateup.FragmentsCardsForProfile.BiographyFragment;
 import com.example.mateup.FragmentsCardsForProfile.PartnersFragment;
 import com.example.mateup.FragmentsCardsForProfile.PostsFragment;
+import com.example.mateup.services.RestClient;
 
 import java.util.ArrayList;
 
@@ -24,8 +29,10 @@ public class ProfileActivity extends AppCompatActivity {
     private CircleImageView new_profile_image;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private EditText displayName;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,12 +45,39 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
+
+
         TabLayout tabLayout=findViewById(R.id.tab_layout);
          ViewPager viewPager=findViewById(R.id.view_pager);
 
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 
+
+       Thread t = new Thread(new Runnable() {
+           @Override
+           public void run() {
+
+               try {
+                   RestClient rc = new RestClient("/users/auth");
+                   String response = rc.executeGet();
+                   Log.i("profil",response);
+
+
+
+
+
+               }catch(Exception e)
+               {
+                   Log.e("Filippp",e.getMessage());
+                   Log.e("Filippppp", e.toString());
+                   Log.v("Filipppp", "Verbos");
+                   e.printStackTrace();
+
+               }
+
+           }
+       });t.start();
 
 
 

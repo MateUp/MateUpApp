@@ -80,14 +80,24 @@ public class RegisterActivity extends AppCompatActivity {
                         JSONObject res = new JSONObject(response);
                         res.get("token");
 
+                        Intent openLoginActivity = new Intent(getApplicationContext(),LoginActivity.class);
+                        startActivity(openLoginActivity);
+
+
+
+
+
                         runOnUiThread(new Runnable() {
                             public void run() {
-                                Toast.makeText(getBaseContext(),"Registered",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getBaseContext(),"registered",Toast.LENGTH_LONG).show();
                             }
                         });
 
-                        Intent openLoginActivity = new Intent(getApplicationContext(),LoginActivity.class);
-                        startActivity(openLoginActivity);
+
+
+
+
+
 
 
 
@@ -115,4 +125,6 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
+
+
 }

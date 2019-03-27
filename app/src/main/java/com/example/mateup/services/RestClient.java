@@ -13,8 +13,12 @@ See the License for the specific language governing permissions and
 limitations under the License.*/
 
 
-
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
+
+import com.example.mateup.LoginActivity;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -44,31 +48,42 @@ public class RestClient {
     String url;
     String headerName;
     String headerValue;
+    String token;
 
 
-    public RestClient(String s){
+
+    public RestClient(String s) {
+
 
         url = "https://mateup.nstechlabs.com/api" + s;
 
-        Header header1 = new BasicHeader(HttpHeaders.CONTENT_TYPE, "application/json");
 
-        //
-//        if (ako ima token) {
-//            Header header1 = new BasicHeader(HttpHeaders.AUTHORIZATION, Dodaj token);
-//        }
+
+
+        Context applicationContext = LoginActivity.getContextOfApplication();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext);
+        token = sharedPreferences.getString("token", "");
+
+
+        Header header1 = new BasicHeader(HttpHeaders.CONTENT_TYPE, "application/json");
+        Header header2 = new BasicHeader(HttpHeaders.AUTHORIZATION, token);
+
+
+
+
 
     }
 
 
 
-    public void addHeader(String name, String value){
+    public void addHeader(String name, String value) {
 
         headerName = name;
         headerValue = value;
 
     }
 
-    public void addParam(String key, String value){
+    public void addParam(String key, String value) {
 
         try {
             data.put(key, value);
@@ -81,7 +96,7 @@ public class RestClient {
     }
 
 
-    public String executePost(String data){  // If you want to use post method to hit server
+    public String executePost(String data) {  // If you want to use post method to hit server
 
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(url);
@@ -113,26 +128,42 @@ public class RestClient {
         return result;
 
 
-
     }
 
-    public String executeGet(){ //If you want to use get method to hit server
+    public String executeGet() { //If you want to use get method to hit server
 
         HttpClient httpClient = new DefaultHttpClient();
         HttpGet httpget = new HttpGet(url);
+        httpget.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
+        httpget.setHeader(HttpHeaders.AUTHORIZATION,token);
         String result = null;
         ResponseHandler<String> responseHandler = new BasicResponseHandler();
+
+
         try {
             result = httpClient.execute(httpget, responseHandler);
+
         } catch (ClientProtocolException e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
+            Log.e("get funkcija", e.getMessage());
+            String response = e.getMessage();
+            return response;
+
+
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
+
+
         }
 
+
         return result;
+
     }
+
+
 }
+
 

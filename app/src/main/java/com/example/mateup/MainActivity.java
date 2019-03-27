@@ -1,5 +1,6 @@
 package com.example.mateup;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Spinner;
@@ -25,12 +27,18 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private Toolbar mainToolbar;
     private Spinner dropdownMenu;
+    public static Context contextOfApplication;
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.contextOfApplication = getApplicationContext();
+        Log.i("filippp",getApplicationContext().toString());
 
         mainToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mainToolbar);
@@ -49,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -58,12 +64,15 @@ public class MainActivity extends AppCompatActivity {
                 UserMenuSelector(menuItem);
                 return false;
 
+                  }
 
-            }
+              });
 
-        });
+
 
     }
+
+
 
 
     @Override
@@ -77,9 +86,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //drawer options
-    private void UserMenuSelector(MenuItem menuItem)
+
+     void UserMenuSelector(MenuItem menuItem)
     {
+
 
          switch (menuItem.getItemId())
          {

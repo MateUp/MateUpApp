@@ -1,6 +1,8 @@
 package com.example.mateup;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -22,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailLogin, passwordLogin;
     private CheckBox rememberMe;
     private TextView textView2;
+    public static Context contextOfApplication;
 
 
     @Override
@@ -51,8 +54,14 @@ public class LoginActivity extends AppCompatActivity {
 
         });
 
+        contextOfApplication = getApplicationContext();
 
 
+
+    }
+
+    public static Context getContextOfApplication(){
+        return contextOfApplication;
     }
 
     private void openRegisterActivity() {
@@ -83,9 +92,21 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
+
                     if (response != null) {
                         JSONObject res = new JSONObject(response);
                         res.get("token");
+                        Log.i("token", String.valueOf(res.get("token")));
+
+                        SharedPreferences sharedPref = LoginActivity.this.getPreferences(Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString("token", String.valueOf(res.get("token")));
+                        editor.commit();
+
+                        String token = sharedPref.getString("token","");
+                        Log.i("token1",token);
+
+
 
                         runOnUiThread(new Runnable() {
                             @Override
@@ -97,8 +118,6 @@ public class LoginActivity extends AppCompatActivity {
 
                         Intent openStoryLineActivity = new Intent(getApplicationContext(),MainActivity.class);
                         startActivity(openStoryLineActivity);
-
-
                     }
 
 
