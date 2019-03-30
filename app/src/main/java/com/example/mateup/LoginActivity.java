@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -98,13 +99,15 @@ public class LoginActivity extends AppCompatActivity {
                         res.get("token");
                         Log.i("token", String.valueOf(res.get("token")));
 
-                        SharedPreferences sharedPref = LoginActivity.this.getPreferences(Context.MODE_PRIVATE);
+
+                        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
                         SharedPreferences.Editor editor = sharedPref.edit();
                         editor.putString("token", String.valueOf(res.get("token")));
                         editor.commit();
 
                         String token = sharedPref.getString("token","");
-                        Log.i("token1",token);
+                        Log.i("shared",token);
+
 
 
 

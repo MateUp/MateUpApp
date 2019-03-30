@@ -15,10 +15,13 @@ limitations under the License.*/
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.mateup.LoginActivity;
+import com.example.mateup.RegisterActivity;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -48,7 +51,16 @@ public class RestClient {
     String url;
     String headerName;
     String headerValue;
-    String token;
+
+
+
+    Context applicationContext = LoginActivity.getContextOfApplication();
+    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(applicationContext);
+    String token = pref.getString("token","not found");
+
+
+    Header header2 = new BasicHeader(HttpHeaders.AUTHORIZATION, token);
+    Header header1 = new BasicHeader(HttpHeaders.CONTENT_TYPE, "application/json");
 
 
 
@@ -57,22 +69,8 @@ public class RestClient {
 
         url = "https://mateup.nstechlabs.com/api" + s;
 
-
-
-
-        Context applicationContext = LoginActivity.getContextOfApplication();
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext);
-        token = sharedPreferences.getString("token", "");
-
-
-        Header header1 = new BasicHeader(HttpHeaders.CONTENT_TYPE, "application/json");
-        Header header2 = new BasicHeader(HttpHeaders.AUTHORIZATION, token);
-
-
-
-
-
     }
+
 
 
 
@@ -143,11 +141,13 @@ public class RestClient {
         try {
             result = httpClient.execute(httpget, responseHandler);
 
+
         } catch (ClientProtocolException e) {
 
             e.printStackTrace();
             Log.e("get funkcija", e.getMessage());
             String response = e.getMessage();
+            Log.i("pref",token);
             return response;
 
 

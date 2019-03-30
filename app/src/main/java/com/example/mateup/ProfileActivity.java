@@ -20,6 +20,8 @@ import com.example.mateup.FragmentsCardsForProfile.PartnersFragment;
 import com.example.mateup.FragmentsCardsForProfile.PostsFragment;
 import com.example.mateup.services.RestClient;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -47,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
+
         TabLayout tabLayout=findViewById(R.id.tab_layout);
          ViewPager viewPager=findViewById(R.id.view_pager);
 
@@ -62,6 +65,17 @@ public class ProfileActivity extends AppCompatActivity {
                    RestClient rc = new RestClient("/users/auth");
                    String response = rc.executeGet();
                    Log.i("profil",response);
+
+                   JSONObject userInfo = new JSONObject(response);
+                   final String userName = userInfo.getString("firstName");
+
+                   runOnUiThread(new Runnable() {
+                       @Override
+                       public void run() {
+                           name_of_user.setText(userName);
+                       }
+                   });
+
 
 
 
