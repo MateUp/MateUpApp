@@ -59,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
             user.put("lastName", LastNameRegister.getText());
             user.put("password", passwordRegister.getText());
             user.put("country",CountryRegister.getText());
-            user.put("profesion", RCH.getText());
+            user.put("profession", RCH.getText());
         } catch (JSONException e) {
             Log.e("Filippppp", "FILIP_ERR 1");
             e.printStackTrace();

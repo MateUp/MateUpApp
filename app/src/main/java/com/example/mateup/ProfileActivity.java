@@ -50,6 +50,8 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
+
+
         TabLayout tabLayout=findViewById(R.id.tab_layout);
          ViewPager viewPager=findViewById(R.id.view_pager);
 
@@ -68,11 +70,15 @@ public class ProfileActivity extends AppCompatActivity {
 
                    JSONObject userInfo = new JSONObject(response);
                    final String userName = userInfo.getString("firstName");
+                   final String prf = userInfo.getString("profession");
+
 
                    runOnUiThread(new Runnable() {
                        @Override
                        public void run() {
                            name_of_user.setText(userName);
+                           profession.setText(prf);
+
                        }
                    });
 

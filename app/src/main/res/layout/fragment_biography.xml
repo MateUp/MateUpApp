@@ -32,14 +32,14 @@
             android:background="#707073">
 
             <TextView
-                android:id="@+id/name_of_user"
+                android:id="@+id/bio_user_name"
                 android:layout_width="350dp"
                 android:layout_height="30dp"
-                android:text="Name of user"
-                android:textSize="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="3dp"
-                android:textColor="#fff"/>
+                android:text="Name of user"
+                android:textColor="#fff"
+                android:textSize="20dp" />
             <TextView
                 android:id="@+id/country"
                 android:layout_width="350dp"
@@ -49,15 +49,16 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="30dp"
                 android:textColor="#fff"/>
+
             <TextView
-                android:id="@+id/profession"
+                android:id="@+id/bio_profession"
                 android:layout_width="350dp"
                 android:layout_height="30dp"
-                android:text="Profession"
-                android:textSize="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="60dp"
-                android:textColor="#fff"/>
+                android:text="Profession"
+                android:textColor="#fff"
+                android:textSize="20dp" />
 
         </RelativeLayout>
 
