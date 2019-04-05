@@ -2,8 +2,10 @@ package com.example.mateup;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private RecyclerView recyclerView;
     public DrawerLayout drawerLayout;
+
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private Toolbar mainToolbar;
     private Spinner dropdownMenu;
@@ -45,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         this.contextOfApplication = getApplicationContext();
-        Log.i("filippp",getApplicationContext().toString());
 
         mainToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mainToolbar);
@@ -55,12 +57,24 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         //Toolbar btn
         actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this,drawerLayout , R.string.drawer_open, R.string.drawer_close );
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         View navHeader = navigationView.inflateHeaderView(R.layout.navigation_header);
+        TextView drawer_username = (TextView) navHeader.findViewById(R.id.drawer_username);
+
+
+        //set drawer profile info
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        String firstName = pref.getString("firstName","not found");
+        String lastName = pref.getString("lastName","not found");
+        drawer_username.setText(firstName + " " + lastName);
+
+
+
 
 
 
@@ -80,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     }
 
 
@@ -92,12 +107,19 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
        return super.onOptionsItemSelected(item);
+
+
     }
+
+
+
+
 
 
 
      void UserMenuSelector(MenuItem menuItem)
     {
+
 
 
          switch (menuItem.getItemId())
