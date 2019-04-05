@@ -92,8 +92,6 @@ public class LoginActivity extends AppCompatActivity {
                     String response = rc.executePost(user.toString());
 
 
-
-
                     if (response != null) {
                         JSONObject res = new JSONObject(response);
                         res.get("token");
@@ -119,6 +117,8 @@ public class LoginActivity extends AppCompatActivity {
 
                         });
 
+                        saveInfo();
+
                         Intent openStoryLineActivity = new Intent(getApplicationContext(),MainActivity.class);
                         startActivity(openStoryLineActivity);
                     }
@@ -143,10 +143,41 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
 
-
-
             }
-        });
-        t.start();
+        });t.start();
+
+
+    }
+
+    public void saveInfo()
+    {
+        try {
+            RestClient rc = new RestClient("/users/auth");
+            String response = rc.executeGet();
+            Log.i("profil",response);
+
+            JSONObject userInfo = new JSONObject(response);
+            final String userName = userInfo.getString("firstName");
+            final String lastName = userInfo.getString("lastName");
+            final String prf = userInfo.getString("profession");
+            final String cntry = userInfo.getString("country");
+
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("firstName", userName);
+            editor.putString("lastName", lastName);
+            editor.putString("profession", prf);
+            editor.putString("country", cntry);
+            editor.commit();
+
+
+        }catch(Exception e)
+        {
+            Log.e("Filippp",e.getMessage());
+            Log.e("Filippppp", e.toString());
+            Log.v("Filipppp", "Verbos");
+            e.printStackTrace();
+
+        }
     }
 }

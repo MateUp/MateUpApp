@@ -1,8 +1,10 @@
 package com.example.mateup;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -27,7 +29,7 @@ import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
-    private TextView name_of_user, profession;
+    private TextView name_of_user, profession,bio_user_name;
     private CircleImageView new_profile_image;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -41,72 +43,48 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
 
+
+
+
         name_of_user=(TextView) findViewById(R.id.name_of_user);
         profession=(TextView) findViewById(R.id.profession);
         new_profile_image=(CircleImageView) findViewById(R.id.new_profileImage);
+        bio_user_name = (TextView) findViewById(R.id.bio_user_name);
 
+        Thread setProfileInfo = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(ProfileActivity.this);
+                final String firstName = pref.getString("firstName","not found");
+                final String lastName = pref.getString("lastName","not found");
+                final String prf = pref.getString("profession","not found");
 
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        name_of_user.setText(firstName + " " + lastName);
+                        profession.setText(prf);
 
+                    }
+                });
+            }
+        });setProfileInfo.start();
 
 
 
 
 
         TabLayout tabLayout=findViewById(R.id.tab_layout);
-         ViewPager viewPager=findViewById(R.id.view_pager);
+        ViewPager viewPager=findViewById(R.id.view_pager);
 
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-
-
-       Thread t = new Thread(new Runnable() {
-           @Override
-           public void run() {
-
-               try {
-                   RestClient rc = new RestClient("/users/auth");
-                   String response = rc.executeGet();
-                   Log.i("profil",response);
-
-                   JSONObject userInfo = new JSONObject(response);
-                   final String userName = userInfo.getString("firstName");
-                   final String prf = userInfo.getString("profession");
-
-
-                   runOnUiThread(new Runnable() {
-                       @Override
-                       public void run() {
-                           name_of_user.setText(userName);
-                           profession.setText(prf);
-
-                       }
-                   });
-
-
-
-
-
-
-               }catch(Exception e)
-               {
-                   Log.e("Filippp",e.getMessage());
-                   Log.e("Filippppp", e.toString());
-                   Log.v("Filipppp", "Verbos");
-                   e.printStackTrace();
-
-               }
-
-           }
-       });t.start();
-
-
-
 
 
 
         class ViewPagerAdapter extends FragmentPagerAdapter{
             private ArrayList<Fragment>fragments;
             private  ArrayList<String> titles;
+
 
             ViewPagerAdapter(FragmentManager fragmentManager){
                 super(fragmentManager);
@@ -148,5 +126,11 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
+
     }
+
+
+
+
+
 }

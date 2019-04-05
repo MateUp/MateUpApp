@@ -16,7 +16,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.mateup.services.RestClient;
+
+import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar mainToolbar;
     private Spinner dropdownMenu;
     public static Context contextOfApplication;
+
+
 
 
 
@@ -57,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -71,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
 
 
 
@@ -131,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
         Intent loginIntent=new Intent(MainActivity.this,ProfileActivity.class);
         startActivity(loginIntent) ;
     }
+
+
 
     }
 
