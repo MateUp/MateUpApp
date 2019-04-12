@@ -1,5 +1,6 @@
 package com.example.mateup;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -36,7 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
     private EditText displayName;
 
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

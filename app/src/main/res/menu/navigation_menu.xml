@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item android:title="Add Post"
+        android:id="@+id/add_post"
+        android:icon="@drawable/add_post"></item>
+
     <item android:title="Story Line"
         android:id="@+id/storyline"
         android:icon="@drawable/home"
@@ -15,9 +19,7 @@
         android:id="@+id/messages"
         android:icon="@drawable/messages"></item>
 
-    <item android:title="Settings"
-        android:id="@+id/settiings"
-        android:icon="@drawable/settings"></item>
+
 
     <item android:title="Log Out"
         android:id="@+id/logout"

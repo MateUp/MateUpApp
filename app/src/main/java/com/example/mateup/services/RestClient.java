@@ -99,6 +99,7 @@ public class RestClient {
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(url);
         httpPost.setHeader(HttpHeaders.CONTENT_TYPE, "application/json");
+        httpPost.setHeader(HttpHeaders.AUTHORIZATION,token);
         HttpResponse response = null;
         String result = null;
         try {
