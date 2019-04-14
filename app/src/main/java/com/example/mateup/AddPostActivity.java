@@ -1,29 +1,23 @@
 package com.example.mateup;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.content.CursorLoader;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.mbms.FileServiceInfo;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-
+import android.widget.Toast;
 
 import com.example.mateup.models.FileUpload;
 import com.example.mateup.services.RestClient;
@@ -32,9 +26,7 @@ import com.ipaulpro.afilechooser.utils.FileUtils;
 import org.json.JSONObject;
 
 import java.io.File;
-
 import java.io.IOException;
-
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -65,40 +57,32 @@ public class AddPostActivity extends AppCompatActivity {
 
         selectImage();
 
-        postBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createPostAndUploadImage();
-            }
-        });
+        postBtn.setOnClickListener(v -> createPostAndUploadImage());
     }
 
 
     private  void createPostAndUploadImage() {
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    JSONObject postDescription = new JSONObject();
-                    postDescription.put("content", description.getText());
-                    RestClient rc = new RestClient("/posts");
-                    String response = rc.executePost(postDescription.toString());
-                    Log.i("content", response);
+        AsyncTask.execute(() -> {
+            try {
+                JSONObject postDescription = new JSONObject();
+                postDescription.put("content", description.getText());
+                RestClient rc = new RestClient("/posts");
+                String response = rc.executePost(postDescription.toString());
+                Log.i("content", response);
 
 
-                    if (response != null) {
-                        JSONObject res = new JSONObject(response);
-                        String postId = res.getString("_id");
-                        Log.i("post", postId);
+                if (response != null) {
+                    JSONObject res = new JSONObject(response);
+                    String postId = res.getString("_id");
+                    Log.i("post", postId);
 
-                        uploadImage(postId);
-                    }
-
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-
+                    uploadImage(postId);
                 }
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
             }
         });
     }
@@ -138,12 +122,15 @@ public class AddPostActivity extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-               // INFO: Slika je uspesno aplodovana
-            }
+                Toast.makeText(AddPostActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                Intent storyLine = new Intent(AddPostActivity.this,MainActivity.class);
+                startActivity(storyLine);
+        }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                // INFO: Error
+                Toast.makeText(AddPostActivity.this, "Error", Toast.LENGTH_SHORT).show();
+
                 t.printStackTrace();
             }
         });
