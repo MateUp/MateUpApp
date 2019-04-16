@@ -134,6 +134,7 @@ public class AddPostActivity extends AppCompatActivity {
                 Toast.makeText(AddPostActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
                 Intent storyLine = new Intent(AddPostActivity.this,MainActivity.class);
                 startActivity(storyLine);
+
         }
 
             @Override

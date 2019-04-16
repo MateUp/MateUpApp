@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 }else {
                                     i = i++;
+                                    Log.i("nesto", "nema slike");
 
                                 }
 
