@@ -15,23 +15,43 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int RESULT_LOAD_IMAGE = 1;
+
     private NavigationView navigationView;
-    private RecyclerView postView;
     public DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private Toolbar mainToolbar;
     public ImageView imageView;
     public static Context contextOfApplication;
+    private RecyclerView recyclerView;
+    private PostAdapter postAdapter;
+    private ArrayList<UsersPosts> postList;
+    private RequestQueue requestQueue;
 
 
 
@@ -42,6 +62,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         this.contextOfApplication = getApplicationContext();
+
+        recyclerView = findViewById(R.id.all_users_post_list);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        postList = new ArrayList<>();
+
+        requestQueue = Volley.newRequestQueue(this);
+        parseJSON();
+
 
         mainToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mainToolbar);
@@ -62,12 +95,7 @@ public class MainActivity extends AppCompatActivity {
         View navHeader = navigationView.inflateHeaderView(R.layout.navigation_header);
         TextView drawer_username = (TextView) navHeader.findViewById(R.id.drawer_username);
 
-        postView = (RecyclerView) findViewById(R.id.all_users_post_list);
-        postView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
-        postView.setLayoutManager(linearLayoutManager);
+
 
 
         //set drawer profile info
@@ -88,14 +116,92 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        DisplayAllUserPosts();
+
 
 
 
 
     }
 
+    private void parseJSON() {
+        String Url = "https://mateup.nstechlabs.com/api/posts";
 
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        String token = pref.getString("token", "not found");
+
+
+
+
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, Url, null,
+                new Response.Listener<JSONArray>() {
+
+
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+
+
+
+                        try {
+
+
+                            Log.i("proba", String.valueOf(response));
+
+
+
+                            for (int i = 0; i < response.length(); i++)
+                            {
+                                JSONObject post = response.getJSONObject(i);
+                                String postDescription = post.getString("content");
+                                String postDate = post.getString("createdAt");
+
+
+                                if(post.has("photo")){
+                                JSONObject photo = post.getJSONObject("photo");
+                                String imageUrl = photo.getString("publicUrl");
+                                    postList.add(new UsersPosts(imageUrl,postDescription,postDate));
+
+                                }else {
+                                    String imageUrl = "Dont Have Photo";
+                                    postList.add(new UsersPosts(imageUrl,postDescription,postDate));
+                                }
+
+
+
+
+
+
+
+
+
+
+                            }
+                            postAdapter = new PostAdapter(MainActivity.this , postList);
+                            recyclerView.setAdapter(postAdapter);
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.e("stae",e.getMessage());
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Log.e("proba",error.getMessage());
+            }
+        }){ public Map getHeaders() throws AuthFailureError {
+            HashMap headers = new HashMap();
+            headers.put("Content-Type", "application/json");
+            headers.put("Authorization",token);
+            return headers;
+        }};requestQueue.add(jsonArrayRequest);
+    }
 
 
     @Override
@@ -161,10 +267,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(loginIntent);
     }
 
-    private void DisplayAllUserPosts() {
 
-
-    }
 
 
 
