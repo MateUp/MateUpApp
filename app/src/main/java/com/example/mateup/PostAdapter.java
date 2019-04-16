@@ -38,13 +38,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         String imageUrl = curentPost.getImgUrl();
         String postDescription = curentPost.getDescription();
         String postDate = curentPost.getDate();
+        String firstName = curentPost.getUserName();
+        String lastName = curentPost.getUserLastName();
+        String profession = curentPost.getUserProfession();
 
 
 
-        if (imageUrl != null && postDescription != null && postDate != null){
+        if (imageUrl != null && postDescription != null && postDate != null && firstName !=null && lastName!=null && profession != null ){
         postViewHolder.postDescription.setText(postDescription);
         Picasso.get().load(imageUrl).fit().centerInside().into(postViewHolder.postImage);
-        postViewHolder.dateOfPost.setText(postDate);}
+        postViewHolder.dateOfPost.setText(postDate);
+        postViewHolder.nameOfUser.setText(firstName+" "+lastName+" , "+profession);}
 
 
 
@@ -63,6 +67,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         public ImageView postImage;
         public TextView postDescription;
         public TextView dateOfPost;
+        public TextView nameOfUser;
 
         public PostViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -70,6 +75,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             postImage = itemView.findViewById(R.id.post_image);
             postDescription = itemView.findViewById(R.id.post_description);
             dateOfPost = itemView.findViewById(R.id.post_date);
+            nameOfUser = itemView.findViewById(R.id.post_user_name);
+
 
         }
     }

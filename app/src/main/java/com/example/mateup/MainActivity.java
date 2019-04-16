@@ -156,22 +156,22 @@ public class MainActivity extends AppCompatActivity {
                                 JSONObject post = response.getJSONObject(i);
                                 String postDescription = post.getString("content");
                                 String postDate = post.getString("createdAt");
+                                JSONObject user = post.getJSONObject("user");
+                                String firstName = user.getString("firstName");
+                                String lastName = user.getString("lastName");
+                                String profession = user.getString("profession");
 
 
-                                if(post.has("photo")){
+                                if(post.has("photo") ){
                                 JSONObject photo = post.getJSONObject("photo");
                                 String imageUrl = photo.getString("publicUrl");
-                                    postList.add(new UsersPosts(imageUrl,postDescription,postDate));
+
+                                    postList.add(new UsersPosts(imageUrl,postDescription,postDate,firstName,lastName,profession));
 
                                 }else {
-                                    String imageUrl = "Dont Have Photo";
-                                    postList.add(new UsersPosts(imageUrl,postDescription,postDate));
+                                    i = i++;
+
                                 }
-
-
-
-
-
 
 
 

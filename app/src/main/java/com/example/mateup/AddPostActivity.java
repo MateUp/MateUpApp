@@ -1,9 +1,11 @@
 package com.example.mateup;
 
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -11,6 +13,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -40,6 +44,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AddPostActivity extends AppCompatActivity {
 
+
     Bitmap bm;
     public ImageView postReview;
     public EditText description;
@@ -55,10 +60,13 @@ public class AddPostActivity extends AppCompatActivity {
         description = (EditText) findViewById(R.id.description);
         postBtn = (Button) findViewById(R.id.post_btn);
 
+
+
         selectImage();
 
         postBtn.setOnClickListener(v -> createPostAndUploadImage());
     }
+
 
 
     private  void createPostAndUploadImage() {
@@ -122,6 +130,7 @@ public class AddPostActivity extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.i("slika",response.toString());
                 Toast.makeText(AddPostActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
                 Intent storyLine = new Intent(AddPostActivity.this,MainActivity.class);
                 startActivity(storyLine);
@@ -130,6 +139,7 @@ public class AddPostActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(AddPostActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                Log.e("slika",t.getMessage());
 
                 t.printStackTrace();
             }
