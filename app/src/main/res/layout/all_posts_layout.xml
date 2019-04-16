@@ -40,7 +40,7 @@
                     android:id="@+id/post_user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="MateUp"
+                    android:text="Filip Kostic"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="8dp"
                     android:textAlignment="textStart"

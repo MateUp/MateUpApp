@@ -41,9 +41,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
 
 
+        if (imageUrl != null && postDescription != null && postDate != null){
         postViewHolder.postDescription.setText(postDescription);
         Picasso.get().load(imageUrl).fit().centerInside().into(postViewHolder.postImage);
-        postViewHolder.dateOfPost.setText(postDate);
+        postViewHolder.dateOfPost.setText(postDate);}
 
 
 
