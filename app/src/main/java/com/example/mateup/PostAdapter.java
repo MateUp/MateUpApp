@@ -40,15 +40,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         String postDate = curentPost.getDate();
         String firstName = curentPost.getUserName();
         String lastName = curentPost.getUserLastName();
-        String profession = curentPost.getUserProfession();
 
 
 
-        if (imageUrl != null && postDescription != null && postDate != null && firstName !=null && lastName!=null && profession != null ){
+
+        if (imageUrl != null && postDescription != null && postDate != null && firstName !=null && lastName!=null  ){
         postViewHolder.postDescription.setText(postDescription);
         Picasso.get().load(imageUrl).fit().centerInside().into(postViewHolder.postImage);
         postViewHolder.dateOfPost.setText(postDate);
-        postViewHolder.nameOfUser.setText(firstName+" "+lastName+" , "+profession);}
+        postViewHolder.nameOfUser.setText(firstName+" "+lastName);}
 
 
 

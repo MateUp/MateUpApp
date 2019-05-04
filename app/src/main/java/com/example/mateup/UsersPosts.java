@@ -9,14 +9,14 @@ public class UsersPosts {
     String userLastName;
     String userProfession;
 
-public UsersPosts(String imageUrl, String postDescription,String postDate,String name, String lastName, String profession)
+public UsersPosts(String imageUrl, String postDescription,String postDate,String name, String lastName)
 {
  imgUrl = imageUrl;
  description = postDescription;
  date = postDate;
  userName = name;
  userLastName = lastName;
- userProfession = profession;
+
 
 }
 
@@ -28,9 +28,6 @@ public UsersPosts(String imageUrl, String postDescription,String postDate,String
         return userLastName;
     }
 
-    public String getUserProfession() {
-        return userProfession;
-    }
 
     public String getDate() {
         return date;

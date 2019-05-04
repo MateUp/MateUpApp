@@ -2,6 +2,7 @@ package com.example.mateup;
 
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -51,10 +52,15 @@ public class AddPostActivity extends AppCompatActivity {
     public Button postBtn;
     private Uri path;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_post);
+
+
 
         postReview = (ImageView) findViewById(R.id.postReview);
         description = (EditText) findViewById(R.id.description);
@@ -64,7 +70,11 @@ public class AddPostActivity extends AppCompatActivity {
 
         selectImage();
 
-        postBtn.setOnClickListener(v -> createPostAndUploadImage());
+        postBtn.setOnClickListener(v -> {
+
+            createPostAndUploadImage();
+        });
+
     }
 
 
@@ -134,6 +144,8 @@ public class AddPostActivity extends AppCompatActivity {
                 Toast.makeText(AddPostActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
                 Intent storyLine = new Intent(AddPostActivity.this,MainActivity.class);
                 startActivity(storyLine);
+
+
 
         }
 
