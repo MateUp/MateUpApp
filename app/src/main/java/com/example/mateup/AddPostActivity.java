@@ -51,6 +51,8 @@ public class AddPostActivity extends AppCompatActivity {
     public EditText description;
     public Button postBtn;
     private Uri path;
+    ProgressDialog progressDialog;
+
 
 
 
@@ -68,11 +70,25 @@ public class AddPostActivity extends AppCompatActivity {
 
 
 
+
         selectImage();
 
-        postBtn.setOnClickListener(v -> {
 
-            createPostAndUploadImage();
+
+        postBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressDialog = new ProgressDialog(AddPostActivity.this);
+                progressDialog.setTitle("Please Wait");
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.setMessage("Posting...");
+                progressDialog.show();
+
+
+                AddPostActivity.this.createPostAndUploadImage();
+
+
+            }
         });
 
     }
@@ -143,6 +159,7 @@ public class AddPostActivity extends AppCompatActivity {
                 Log.i("slika",response.toString());
                 Toast.makeText(AddPostActivity.this, "Uploaded", Toast.LENGTH_SHORT).show();
                 Intent storyLine = new Intent(AddPostActivity.this,MainActivity.class);
+                progressDialog.dismiss();
                 startActivity(storyLine);
 
 

@@ -1,5 +1,6 @@
 package com.example.mateup;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText CountryRegister;
     private EditText passwordRegister;
     private EditText RCH;
+    ProgressDialog progressDialog;
 
 
     @Override
@@ -40,6 +42,11 @@ public class RegisterActivity extends AppCompatActivity {
         RegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog = new ProgressDialog(RegisterActivity.this);
+                progressDialog.setTitle("Please Wait");
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.setMessage("Reggistering...");
+                progressDialog.show();
                 openLoginActivity();
             }
         });
@@ -81,6 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
                         res.get("token");
 
                         Intent openLoginActivity = new Intent(getApplicationContext(),LoginActivity.class);
+                        progressDialog.dismiss();
                         startActivity(openLoginActivity);
 
 

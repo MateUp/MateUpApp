@@ -1,5 +1,6 @@
 package com.example.mateup;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox rememberMe;
     private TextView textView2;
     public static Context contextOfApplication;
+    ProgressDialog progressDialog;
 
 
     @Override
@@ -44,7 +46,13 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog = new ProgressDialog(LoginActivity.this);
+                progressDialog.setTitle("Please Wait");
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.setMessage("Logging in....");
+                progressDialog.show();
                 openStoryLineActivity();
+
             }
         });
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
                         saveInfo();
 
                         Intent openStoryLineActivity = new Intent(getApplicationContext(),MainActivity.class);
+                        progressDialog.dismiss();
                         startActivity(openStoryLineActivity);
                     }
 
