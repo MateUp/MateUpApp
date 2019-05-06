@@ -10,10 +10,12 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +45,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.google.gson.internal.$Gson$Types.arrayOf;
+
 public class AddPostActivity extends AppCompatActivity {
 
 
@@ -57,6 +61,7 @@ public class AddPostActivity extends AppCompatActivity {
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,10 +73,18 @@ public class AddPostActivity extends AppCompatActivity {
         description = (EditText) findViewById(R.id.description);
         postBtn = (Button) findViewById(R.id.post_btn);
 
+        if (ContextCompat.checkSelfPermission(AddPostActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            Intent i = new Intent(AddPostActivity.this,MainActivity.class);
+            startActivity(i);
+        }else {selectImage();}
 
 
 
-        selectImage();
+
+
+
+
 
 
 
